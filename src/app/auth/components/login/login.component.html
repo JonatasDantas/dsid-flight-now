@@ -1,0 +1,61 @@
+<nb-card>
+    <nb-card-header style="padding: 0">
+      <h2 class="title">
+        <h4>Flight Now</h4>
+      </h2>
+    </nb-card-header>
+
+    <nb-card-body>
+      <form (ngSubmit)="login()" #form="ngForm" autocomplete="off" novalidate>
+        <div *ngIf="errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
+          <div>
+            <strong>Oops!</strong>
+          </div>
+          <div *ngFor="let error of errors">{{ error }}</div>
+        </div>
+
+        <div *ngIf="infoResult" class="alert alert-success" role="alert">
+          <div>{{infoResult}}</div>
+        </div>
+  
+        <div class="col-12 form-group">
+          <label class="label">Identificação do Usuário</label>
+        </div>
+  
+        <div class="col-12 form-group">
+          <input nbInput fullWidth [(ngModel)]="user.username" #username="ngModel" name="username" id="input-username" placeholder="Usuário"
+            autofocus [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : ''" [required]="true"
+            [attr.aria-invalid]="username.invalid && username.touched ? true : null" oninput="this.value = this.value.toUpperCase()">
+          <ng-container *ngIf="username.invalid && username.touched">
+            <p class="caption status-danger" *ngIf="username.errors?.required">
+              Usuário é obrigatório
+            </p>
+          </ng-container>
+        </div>
+  
+        <div class="col-12 form-group">
+          <input nbInput fullWidth [(ngModel)]="user.password" #password="ngModel" name="password" type="password" id="input-password"
+            placeholder="Senha" [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''" [required]="true" [minlength]="8"
+            [maxlength]="12" [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+          <span class="form-group label-with-link float-right">
+            <a class="forgot-password caption-2" (click)="registerUser()" routerLink="" ngFocus>Ainda não é cadastrado ?</a>
+          </span>
+          <ng-container *ngIf="password.invalid && password.touched ">
+            <p class="caption status-danger" *ngIf="password.errors?.required">
+              Senha é obrigatório
+            </p>
+            <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
+              A senha deve conter de 8 a 12 caracteres
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="col-12 justify-content-center form-group">
+          <button nbButton fullWidth status="primary" size="large" [disabled]="submitted || !form.valid" [class.btn-pulse]="submitted">
+            <i [hidden]="!submitted" class="fa fa-spinner fa-pulse loading"></i>
+            <span>Login</span>
+          </button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
