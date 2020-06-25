@@ -13,32 +13,33 @@ interface LoginServiceOptions {
 }
 
 @Injectable()
-export class LoginService {
+export class LoginService implements OnDestroy {
+    constructor(
+        private http: HttpClient,
+    ) {}
 
     private apiBase = '';
     private apiPath = '';
-    private authPath = 'localhost:8080/usuarios/login';
+    private authPath = 'http://localhost:4300/usuarios/login';
     private authenticatedSubject = new Subject<any>();
 
     @LocalStorage() private token: any;
     @LocalStorage() private userData: any;
 
-    constructor(
-        private router: Router,
-        private http: HttpClient,
-        private storage: LocalStorageService
-    ) {
-    }
-
     login(username: string, password: string){
         return this.completeRequest(username, password);
+    }
+
+    init() {
+        console.log('aaaa');
     }
 
     private completeRequest(username?: string, password?: string): Observable<any> {
         let params;
         const httpOptions = {
             headers: new HttpHeaders({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             })
         };
 
@@ -61,7 +62,6 @@ export class LoginService {
                     this.userData = user;
                     this.token = token;
 
-                    // this.authenticatedSubject.next(response['user']);
                     return { isLogged: true, userInfo: user};
                 } else {
                     // return false to indicate failed login
@@ -79,4 +79,6 @@ export class LoginService {
     //             this.router.navigate(['auth'])
     //     });
     // }
+
+    ngOnDestroy() {}
 }

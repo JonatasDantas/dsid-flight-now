@@ -73,7 +73,8 @@
             "production": {
               "browserTarget": "dsid-flight-now:build:production"
             }
-          }
+          },
+          "proxyConfig": "proxy.config.ts"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

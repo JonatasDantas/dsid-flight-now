@@ -25,7 +25,7 @@
         <div class="col-12 form-group">
           <input nbInput fullWidth [(ngModel)]="user.username" #username="ngModel" name="username" id="input-username" placeholder="Usuário"
             autofocus [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : ''" [required]="true"
-            [attr.aria-invalid]="username.invalid && username.touched ? true : null" oninput="this.value = this.value.toUpperCase()">
+            [attr.aria-invalid]="username.invalid && username.touched ? true : null">
           <ng-container *ngIf="username.invalid && username.touched">
             <p class="caption status-danger" *ngIf="username.errors?.required">
               Usuário é obrigatório
@@ -36,7 +36,7 @@
         <div class="col-12 form-group">
           <input nbInput fullWidth [(ngModel)]="user.password" #password="ngModel" name="password" type="password" id="input-password"
             placeholder="Senha" [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''" [required]="true" [minlength]="8"
-            [maxlength]="12" [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
           <span class="form-group label-with-link float-right">
             <a class="forgot-password caption-2" (click)="registerUser()" routerLink="" ngFocus>Ainda não é cadastrado ?</a>
           </span>

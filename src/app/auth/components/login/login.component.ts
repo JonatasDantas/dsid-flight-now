@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { finalize } from 'rxjs/operators';
+import { LoginService } from '../../../@core/data/loginService';
 
 const ERROR_MESSAGES = {
   400: 'As credenciais informadas estão inválidas. Tente novamente.',
@@ -28,6 +29,7 @@ export class LoginComponent implements OnDestroy {
 
     constructor(
       private router: Router,
+      private loginService: LoginService,
       @Inject(DOCUMENT) private doc: Document,
     ) {
       if (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
@@ -36,15 +38,28 @@ export class LoginComponent implements OnDestroy {
       }
     }
 
-    login(overrideSession = false): void {
+    login(): void {
+      this.errors = this.messages = [];
+      this.submitted = true;
+      const self = this;
 
+      this.loginService.login(this.user.username, this.user.password).pipe(
+        untilDestroyed(this),
+        finalize(() => this.submitted = false),
+      ).subscribe({
+        next: (response) => {
+          if (response.isLogged) {
+            this.router.navigate(['/pages']);
+          }
+        },
+        error: err => {
+          this.errors.push(ERROR_MESSAGES[400]);
+        },
+        complete: () => { },
+      });
     }
 
     registerUser() {}
-
-    onError(err: any) {
-
-    }
 
     ngOnDestroy() {}
   }

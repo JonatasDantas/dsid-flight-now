@@ -6,6 +6,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { ThemeModule } from '../@theme/theme.module';
+import { LoginService } from '../@core/data/loginService';
 
 const PAGES_COMPONENTS = [
     LoginComponent,
@@ -22,6 +23,7 @@ const PAGES_COMPONENTS = [
       ...PAGES_COMPONENTS,
     ],
     providers: [
+      LoginService
     ],
   })
 export class AuthModule { }
