@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarService, NbMenuService } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarService, NbMenuService, NbMenuModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ThemeModule } from './@theme/theme.module';
 import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';
@@ -17,7 +17,8 @@ import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.servi
   imports: [
     BrowserModule,
     HttpClientModule,
-
+    NbDatepickerModule.forRoot(),
+    NbMenuModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     NbLayoutModule,

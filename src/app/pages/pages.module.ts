@@ -5,6 +5,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { PagesRoutingModule } from './pages-routing.module';
+import { NbContextMenuModule } from '@nebular/theme';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     NbMenuModule,
     HomeModule,
     NbLayoutModule,
+    NbContextMenuModule,
   ],
   declarations: [
     PagesComponent,

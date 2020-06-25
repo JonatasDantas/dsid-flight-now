@@ -13,6 +13,11 @@ export class PagesComponent {
   currentTheme = 'default';
   userMenu = [{ title: 'Sair', link: '/pages/logout' }];
 
+  items = [
+    {title: 'minha conta'},
+    {title: 'encerrar sessão'}
+  ]
+
   constructor(
     private router: Router) {
   }
