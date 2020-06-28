@@ -11,6 +11,12 @@
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/grid';
 
+$color-black: #0D0A0B;
+$color-charcoal: #454955;
+$color-white: #F3EFF5;
+$color-green: #72B01D;
+$color-green2: #3F7D20;
+
 @include nb-install() {
   @include nb-theme-global();
 };

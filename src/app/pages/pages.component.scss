@@ -22,13 +22,10 @@
       }
     }
   
-    nb-action {
-      height: auto;
-      display: flex;
-      align-content: center;
-    }
+ 
   
     nb-user {
+      align-self: flex-end;
       cursor: pointer;
     }
   
@@ -39,6 +36,7 @@
     .header-container {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       width: auto;
   
       .sidebar-toggle {
