@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbLayoutModule } from '@nebular/theme';
+import { NbMenuModule, NbLayoutModule, NbContextMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { NbContextMenuModule } from '@nebular/theme';
+import { UserService } from '../@core/data/userService';
 
 @NgModule({
   imports: [
@@ -14,12 +14,12 @@ import { NbContextMenuModule } from '@nebular/theme';
     NbMenuModule,
     HomeModule,
     NbLayoutModule,
-    NbContextMenuModule,
+    NbContextMenuModule
   ],
   declarations: [
     PagesComponent,
   ],
-  providers: []
+  providers: [UserService]
 })
 export class PagesModule {
 }

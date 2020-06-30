@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbSidebarService, NbMenuService, NbMenuModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ThemeModule } from './@theme/theme.module';
-import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,13 @@ import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.servi
     NbLayoutModule,
     NbEvaIconsModule,
     ThemeModule.forRoot(),
+    NbMenuModule.forRoot(),
   ],
-  providers: [NbSidebarService, NbMenuService],
+  providers: [
+    NbSidebarService,
+    NbMenuService,
+    // { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500} },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

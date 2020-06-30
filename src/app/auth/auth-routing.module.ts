@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { LoginComponent } from './components/login/login.component';
 import { AuthComponent } from './components/auth.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'register-user',
+        component: RegisterUserComponent,
       }
     ],
   },
