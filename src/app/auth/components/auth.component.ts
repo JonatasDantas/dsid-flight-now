@@ -5,8 +5,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./auth.component.scss'],
   template: `
     <nb-layout>
-      <nb-layout-column class="d-flex">
-        <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+      <nb-layout-column class="d-flex" style="background-color: #2473c7">
+        <div class="flex-centered col-xl-5 col-lg-6 col-md-8 col-sm-12">
           <router-outlet></router-outlet>
         </div>
       </nb-layout-column>

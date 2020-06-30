@@ -6,11 +6,13 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { ThemeModule } from '../@theme/theme.module';
-import { LoginService } from '../@core/data/loginService';
+import { UserService } from '../@core/data/userService';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 const PAGES_COMPONENTS = [
     LoginComponent,
     AuthComponent,
+    RegisterUserComponent,
 ];
 
 @NgModule({
@@ -23,7 +25,7 @@ const PAGES_COMPONENTS = [
       ...PAGES_COMPONENTS,
     ],
     providers: [
-      LoginService
+      UserService
     ],
   })
 export class AuthModule { }

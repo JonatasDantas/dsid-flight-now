@@ -11,14 +11,11 @@
             </div>
           </div>
           
-          <div class="header-container">
-            <nb-actions size="small">
+          <div class="header-container justify-content-end pr-5">
+            <nb-actions size="small" class="mr-5">
               <nb-action class="user-action">
-                <!-- <nb-user [nbContextMenu]="userMenu"
-                         [onlyPicture]="userPictureOnly"
-                         [name]="user?.name"
-                         [picture]="user?.picture">
-                </nb-user> -->
+                <nb-user [name]="user.username" [nbContextMenu]="userMenu">
+                </nb-user>
               </nb-action>
             </nb-actions>
         </div>          

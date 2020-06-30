@@ -1,0 +1,87 @@
+<nb-card>
+    <nb-card-header style="padding: 0">
+        <h2 class="title">
+          <h4>Criação de Usuário</h4>
+        </h2>
+      </nb-card-header>
+
+    <nb-card-body>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+              <div *ngIf="success && !submitted" class="alert alert-success" role="alert">
+                <div>
+                  <strong>Usuário criado com sucesso!</strong>
+                </div>
+            </div>
+            <div *ngIf="errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
+                <div>
+                  <strong>Oops!</strong>
+                </div>
+                <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label class="label" for="name">Nome Completo
+                      <span class="label-rfi">*</span>
+                    </label>
+                    <input nbInput fullWidth type="text" class="form-control" name="name" id="name"
+                    aria-describedby="nameHelp" placeholder="Nome" formControlName="name">
+                    <ng-container *ngIf="form.get('name').invalid && form.get('name').touched">
+                      <p class="caption status-danger">
+                          Nome Completo é obrigatório
+                      </p>
+                    </ng-container>
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="label" for="email">E-mail
+                      <span class="label-rfi">*</span>
+                    </label>
+                    <input nbInput fullWidth type="text" class="form-control" name="email" id="email"
+                    aria-describedby="nameHelp" placeholder="Email" formControlName="email">
+                    <ng-container *ngIf="form.get('email').invalid && form.get('email').touched">
+                      <p class="caption status-danger">
+                        E-mail é obrigatório
+                      </p>
+                    </ng-container>
+                  </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label class="label" for="username">Usuário
+                      <span class="label-rfi">*</span>
+                    </label>
+                    <input nbInput fullWidth type="text" class="form-control" name="username" id="username"
+                    aria-describedby="nameHelp" placeholder="Username" formControlName="username">
+                    <ng-container *ngIf="form.get('username').invalid && form.get('username').touched">
+                      <p class="caption status-danger">
+                          Usuário é obrigatório
+                      </p>
+                    </ng-container>
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="label" for="password">Senha
+                        <span class="label-rfi">*</span>
+                    </label>
+                    <input nbInput fullWidth type="password" class="form-control" name="password" id="password"
+                    aria-describedby="nameHelp" placeholder="Senha" formControlName="password">
+                    <ng-container *ngIf="form.get('password').invalid && form.get('password').touched">
+                      <p class="caption status-danger">
+                          Senha é obrigatória
+                      </p>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="row float-right mr-0 mt-4">
+                <button nbButton class="" status="danger" size="medium" (click)="onReturn()">Cancelar</button>
+                <button nbButton class="ml-3" status="success" size="medium" [disabled]="submitted" (click)="onSubmit()">
+                  <i [hidden]="!submitted" class="fa fa-spinner fa-pulse loading"></i>
+                  <span>Salvar</span>
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

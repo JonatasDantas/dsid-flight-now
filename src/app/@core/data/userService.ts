@@ -6,42 +6,34 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorage, LocalStorageService } from 'ngx-store';
 
-interface LoginServiceOptions {
+interface userServiceOptions {
     apiBase: string;
     apiPath?: string;
     authPath?: string;
 }
 
 @Injectable()
-export class LoginService implements OnDestroy {
+export class UserService implements OnDestroy {
     constructor(
         private http: HttpClient,
     ) {}
 
-    private apiBase = '';
+    private apiBase = 'http://localhost:4300/';
     private apiPath = '';
-    private authPath = 'http://localhost:4300/usuarios/login';
     private authenticatedSubject = new Subject<any>();
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        })
+    };
 
     @LocalStorage() private token: any;
     @LocalStorage() private userData: any;
 
-    login(username: string, password: string){
-        return this.completeRequest(username, password);
-    }
-
-    init() {
-        console.log('aaaa');
-    }
-
-    private completeRequest(username?: string, password?: string): Observable<any> {
+    login(username?: string, password?: string): Observable<any> {
+        let apiPath = 'usuarios/login';
         let params;
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            })
-        };
 
         params = {
             username: `${username}`,
@@ -49,7 +41,7 @@ export class LoginService implements OnDestroy {
         };
 
         return this.http.post<any>(
-            this.authPath, params, httpOptions,
+            this.apiBase + apiPath, params, this.httpOptions,
         ).pipe(
             untilDestroyed(this),
             map(response => {
@@ -71,14 +63,23 @@ export class LoginService implements OnDestroy {
         );
     }
 
-    // logout() {
-    //     this.userService.logout().pipe(
-    //         untilDestroyed(this),
-    //         ).subscribe(() => {
-    //             this.revokeToken();
-    //             this.router.navigate(['auth'])
-    //     });
-    // }
+    upsert(data: any) :Observable<any> {
+        let apiPath = 'usuarios';
+
+        return this.http.post<any>(
+            this.apiBase + apiPath, data, this.httpOptions, 
+        ).pipe(
+            untilDestroyed(this),
+            map(response => {
+                return response;
+            })
+        )
+    }
+
+    logout() {
+        this.token = undefined;
+        this.userData = undefined;
+    }
 
     ngOnDestroy() {}
 }
