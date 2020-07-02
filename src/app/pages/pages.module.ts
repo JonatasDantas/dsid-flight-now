@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { UserService } from '../@core/data/userService';
+import { UserInfosComponent } from './user-infos/user-infos.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { UserService } from '../@core/data/userService';
   ],
   declarations: [
     PagesComponent,
+    UserInfosComponent,
   ],
   providers: [UserService]
 })

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 import { NbMenuService } from '@nebular/theme';
 import { UserService } from '../@core/data/userService';
+import { User } from '../models/usuario.model';
 
 @Component({
   selector: 'app-ngx-pages',
@@ -12,7 +13,7 @@ import { UserService } from '../@core/data/userService';
   templateUrl: './pages.component.html',
 })
 export class PagesComponent implements OnInit {
-  @LocalStorage() private userData: any;
+  @LocalStorage() private userData: User;
 
   user: any;
   currentTheme = 'default';
@@ -33,8 +34,21 @@ export class PagesComponent implements OnInit {
     this.user = this.userData;
 
     this.nbMenuService.onItemClick().subscribe((a) => {
-      this.userService.logout();
-      this.router.navigate(['auth']);
+
+      switch (a.item.title) {
+
+        case 'minha conta':
+          
+          this.router.navigate(['pages/user-infos']);
+          break;
+        case 'encerrar sessão':
+          this.userService.logout();
+          this.router.navigate(['auth']);
+          break;
+          
+        
+      }
+      
     })
   }
 
