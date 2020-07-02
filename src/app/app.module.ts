@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbSidebarService, NbMenuService, NbMenuModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ThemeModule } from './@theme/theme.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ThemeModule } from './@theme/theme.module';
     NbEvaIconsModule,
     ThemeModule.forRoot(),
     NbMenuModule.forRoot(),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     NbSidebarService,

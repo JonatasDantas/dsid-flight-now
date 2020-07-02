@@ -1,18 +1,51 @@
-<div>
-    <nb-card>
-        <nb-card-body>
-            div.d-flex.
-            <div class="form-field">
-                <label for="data-saida">data de saída</label>
-                    <input name="data-saida" nbInput [nbDatepicker]="datepickerSaida">
-                    <nb-datepicker #datepickerSaida></nb-datepicker>
-            </div>
-            <div class="form-field">
-                <label for="data-volta">data de volta</label>
-                    <input name="data-volta" nbInput [nbDatepicker]="datepickerVolta">
-                    <nb-datepicker #datepickerVolta></nb-datepicker>
+<div class="card card-body mb-4 border border-primary">
+            <div class="d-flex flex-wrap justify-content-end">
+
+                <div class="form-field flex-fill mr-2">
+                        <p>data de saída</p>
+                        <input fullWidth name="data-saida" placeholder="dia da saída" nbInput [nbDatepicker]="datepickerSaida">
+                        <nb-datepicker #datepickerSaida></nb-datepicker>
+                </div>
+
+                <div class="form-field flex-fill mr-2">
+                    
+                        <p>data de saída</p>
+                        <input fullWidth placeholder="dia de retorno" name="data-volta" nbInput [nbDatepicker]="datepickerVolta">
+                        <nb-datepicker #datepickerVolta></nb-datepicker>
+                </div>
+
+                <div class="form-field flex-fill mr-2">
+                    
+                    <p>adultos</p>
+                    <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeAdultos">
+                        <nb-option [value]="1">1</nb-option>
+                        <nb-option [value]="2">2</nb-option>
+                        <nb-option [value]="3">3</nb-option>
+                        <nb-option [value]="4">4</nb-option>
+                        <nb-option [value]="5">4</nb-option>
+                        <nb-option [value]="6">4</nb-option>
+                      </nb-select>
+                </div>
+
+                <div class="form-field flex-fill mr-2">
+                    
+                    <p>crianças</p>
+                    <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeCriancas">
+                        <nb-option [value]="0">0</nb-option>
+                        <nb-option [value]="1">1</nb-option>
+                        <nb-option [value]="2">2</nb-option>
+                        <nb-option [value]="3">3</nb-option>
+                        <nb-option [value]="4">4</nb-option>
+                        <nb-option [value]="5">5</nb-option>
+                        <nb-option [value]="6">6</nb-option>
+                      </nb-select>
+                </div>
+
+                <div class="form-field align-self-end mt-3 mr-2">
+                    <button nbButton status="primary">Voar!</button>
+                </div>
+
+
             </div>
 
-        </nb-card-body>
-    </nb-card>
 </div>

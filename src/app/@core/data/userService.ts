@@ -5,6 +5,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorage, LocalStorageService } from 'ngx-store';
+import { User } from '../../models/usuario.model';
 
 interface userServiceOptions {
     apiBase: string;
@@ -28,10 +29,10 @@ export class UserService implements OnDestroy {
         })
     };
 
-    @LocalStorage() private token: any;
-    @LocalStorage() private userData: any;
+    @LocalStorage() private token: string;
+    @LocalStorage() private userData: User;
 
-    login(username?: string, password?: string): Observable<any> {
+    login(username?: string, password?: string): Observable<{isLogged: boolean, userInfo?: User}> {
         let apiPath = 'usuarios/login';
         let params;
 
@@ -40,7 +41,7 @@ export class UserService implements OnDestroy {
             password: `${password}`,
         };
 
-        return this.http.post<any>(
+        return this.http.post<{token: string, user:User}>(
             this.apiBase + apiPath, params, this.httpOptions,
         ).pipe(
             untilDestroyed(this),

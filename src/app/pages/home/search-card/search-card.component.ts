@@ -9,6 +9,9 @@ export class SearchCardComponent implements OnInit {
 
   constructor() { }
 
+  quantidadeAdultos = 1;
+  quantidadeCriancas = 0;
+
   ngOnInit(): void {
   }
 
