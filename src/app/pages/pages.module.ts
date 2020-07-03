@@ -9,6 +9,7 @@ import { UserService } from '../@core/data/userService';
 import { UserInfosComponent } from './user-infos/user-infos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FlightService } from '../@core/data/flightService';
+import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { FlightService } from '../@core/data/flightService';
     PagesComponent,
     UserInfosComponent,
   ],
-  providers: [UserService, FlightService]
+  providers: [UserService, FlightService, {provide: LOCALE_ID, useValue: 'pt-BR'}]
 })
 export class PagesModule {
 }

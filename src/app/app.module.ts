@@ -14,6 +14,11 @@ import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(ptBr)
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -40,7 +45,7 @@ registerLocaleData(ptBr)
       useClass: TokenInterceptor,
       multi: true
     },
-    { provide: LOCALE_ID, useValue: 'pt' }
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
     // { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500} },
   ],
   bootstrap: [AppComponent]

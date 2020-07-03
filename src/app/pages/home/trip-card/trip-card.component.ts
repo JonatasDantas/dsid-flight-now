@@ -8,13 +8,17 @@ import { Flight } from './trip.model';
 })
 export class TripCardComponent implements OnInit {
 
-  @Input() flight: Flight;
+  @Input() flight: any;
   favorited: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
    
+  }
+
+  getImagePath() {
+    return this.flight.imgName ? `/assets/img/${this.flight.imgName}.jpg` : "/assets/img/airplane.jpg";
   }
 
   favorite() {
