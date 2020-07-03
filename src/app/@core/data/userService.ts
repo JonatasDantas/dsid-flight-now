@@ -30,7 +30,7 @@ export class UserService implements OnDestroy {
     };
 
     @LocalStorage() private token: string;
-    @LocalStorage() private userData: User;
+    @LocalStorage() userData: User;
 
     login(username?: string, password?: string): Observable<{isLogged: boolean, userInfo?: User}> {
         let apiPath = 'usuarios/login';
@@ -75,6 +75,11 @@ export class UserService implements OnDestroy {
                 return response;
             })
         )
+    }
+
+    setUser(user: User) {
+        this.userData = undefined;
+        this.userData = user;
     }
 
     logout() {

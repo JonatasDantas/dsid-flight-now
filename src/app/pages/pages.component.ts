@@ -13,7 +13,7 @@ import { User } from '../models/usuario.model';
   templateUrl: './pages.component.html',
 })
 export class PagesComponent implements OnInit {
-  @LocalStorage() private userData: User;
+  @LocalStorage() userData: User;
 
   user: any;
   currentTheme = 'default';

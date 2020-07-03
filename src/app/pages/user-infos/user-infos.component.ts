@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { LocalStorage } from 'ngx-store';
-import { User } from '../../models/usuario.model';
+import { LocalStorage, LocalStorageService } from 'ngx-store';
+import { User, UserPut } from '../../models/usuario.model';
 import { FormBuilder, Validators, FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { UserService } from '../../@core/data/userService';
+import { UserInfosService } from './user-infos.service';
 
 @Component({
   selector: 'app-user-infos',
@@ -9,15 +11,15 @@ import { FormBuilder, Validators, FormControl, FormGroup, AbstractControl } from
   styleUrls: ['./user-infos.component.scss']
 })
 export class UserInfosComponent implements OnInit {
+  loading: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userInfosService: UserInfosService, public userService: UserService) { }
 
   formEdition = this.fb.group({
     value: ['', Validators.required],
     confirm: ['', Validators.required]
-  }, {validator: equalValidator})
+  }, { validator: equalValidator })
 
-  @LocalStorage() userData: User
 
   @ViewChild('inputValue', { static: false })
   inputValue: ElementRef<HTMLInputElement>;
@@ -32,30 +34,47 @@ export class UserInfosComponent implements OnInit {
 
 
   submit() {
-    console.log(this.formEdition);
+    let user: UserPut = {};
+    user[this.editingField] = this.formEdition.get('value').value
+    this.loading = true;
+    this.userInfosService.dispatchInfos(user, this.userService.userData.id).subscribe(
+      userRes => {
+        this.loading = false;
+        this.editing = false;
+        this.userService.setUser(userRes);
+      },
+      error => {
+        this.loading = false;
+        console.error(error);
+      }
+    )
   }
 
   alterar(field: keyof User) {
     this.editingField = field;
     this.editing = true;
-    this.formEdition.get('value').setValue(this.userData[field])
+    this.formEdition.get('value').setValue(this.userService.userData[field])
     setTimeout(() => {
       this.inputValue.nativeElement.focus()
       this.inputValue.nativeElement.select()
     }, 100);
-    
+
     switch (field) {
       case 'born_date':
         this.placeholderMessage = "a data de nascimento";
+        this.formEdition.controls.value.setValidators([Validators.required])
         break;
       case 'email':
         this.placeholderMessage = "o email";
+        this.formEdition.controls.value.setValidators([Validators.email, Validators.required])
         break;
       case 'name':
         this.placeholderMessage = "o nome";
+        this.formEdition.controls.value.setValidators([Validators.required, Validators.pattern(/.{2,} .+/)])
         break;
       case 'username':
         this.placeholderMessage = "o nome de usuário";
+        this.formEdition.controls.value.setValidators([Validators.required, Validators.pattern(/.{5,}/)])
 
         break;
     }
