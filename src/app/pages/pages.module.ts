@@ -8,6 +8,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { UserService } from '../@core/data/userService';
 import { UserInfosComponent } from './user-infos/user-infos.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FlightService } from '../@core/data/flightService';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     PagesComponent,
     UserInfosComponent,
   ],
-  providers: [UserService]
+  providers: [UserService, FlightService]
 })
 export class PagesModule {
 }
