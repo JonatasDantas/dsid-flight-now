@@ -30,7 +30,7 @@ export class UserService implements OnDestroy {
     };
 
     @LocalStorage() private token: string;
-    @LocalStorage() private userData: User;
+    @LocalStorage() public userData: User;
 
     login(username?: string, password?: string): Observable<{isLogged: boolean, userInfo?: User}> {
         let apiPath = 'usuarios/login';

@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { UserService } from '../@core/data/userService';
 import { UserInfosComponent } from './user-infos/user-infos.component';
+import { FlightService } from '../@core/data/flightService';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { UserInfosComponent } from './user-infos/user-infos.component';
     PagesComponent,
     UserInfosComponent,
   ],
-  providers: [UserService]
+  providers: [UserService, FlightService]
 })
 export class PagesModule {
 }
