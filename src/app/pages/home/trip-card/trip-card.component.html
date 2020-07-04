@@ -10,7 +10,7 @@
  
         <div class="footer d-flex justify-content-between">
             <!-- <button nbButton status="primary">Voar</button> -->
-            <div class="pricing">{{10.2 | currency:'BRL':true}}</div>
+            <div class="pricing">{{ flight.cost | currency:'BRL':true}}</div>
             <div class="align-self-center">
                 <nb-icon  (click)="favorite()" [icon]="favorited ? 'heart' : 'heart-outline'"></nb-icon>
             </div>

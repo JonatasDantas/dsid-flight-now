@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { Flight } from './trip-card/trip.model';
 import { FlightService } from '../../@core/data/flightService';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { finalize } from 'rxjs/operators';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'app-ngx-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private flightService: FlightService,
+    private dialogService: NbDialogService,
   ) { }
 
   ngOnInit() {
@@ -35,8 +37,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(e: any) {
+  submit(e: any, dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog)
+  }
 
+  openDialog(dialog: TemplateRef<any>, flight: Flight) {
+
+    this.dialogService.open(dialog, {
+      context: {
+        ...flight
+      }
+    })
   }
 
   ngOnDestroy(){

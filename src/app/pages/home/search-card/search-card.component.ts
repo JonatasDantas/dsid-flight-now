@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-card',
@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class SearchCardComponent implements OnInit {
 
   constructor() { }
+
+  @Output() submit = new EventEmitter();
+  
+  emit() {
+    this.submit.emit()
+  }
 
   quantidadeAdultos = 1;
   quantidadeCriancas = 0;
