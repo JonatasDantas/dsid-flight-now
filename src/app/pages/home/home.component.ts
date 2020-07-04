@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
-import { Flight } from './trip-card/trip.model';
 import { FlightService } from '../../@core/data/flightService';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { finalize } from 'rxjs/operators';
 import { NbDialogService } from '@nebular/theme';
+import { Flight } from '../../models/flight.model';
+import { FormBuilder } from '@angular/forms';
+import { SearchOutput } from './search-card/search-card.component';
 
 @Component({
   selector: 'app-ngx-home',
@@ -16,12 +18,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   divColumns: any;
   flights: any = [];
 
+  adults: number;
+  kids: number;
+
   constructor(
+    private fb: FormBuilder,
     private flightService: FlightService,
     private dialogService: NbDialogService,
   ) { }
 
   ngOnInit() {
+
     this.divColumns = document.getElementsByClassName('columns');
     this.divColumns[0].classList.add('home-page');
 
@@ -37,15 +44,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(e: any, dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog)
+  submit(e: SearchOutput, dialog: TemplateRef<any>) {
+    this.adults = e.adults;
+    this.kids = e.kids;
   }
 
   openDialog(dialog: TemplateRef<any>, flight: Flight) {
 
     this.dialogService.open(dialog, {
       context: {
-        ...flight
+        flight,
+        adults: this.adults,
+        kids: this.kids
       }
     })
   }

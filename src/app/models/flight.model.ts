@@ -9,5 +9,6 @@ export interface Flight {
   imgName: string;
   previstDate: string;
   cost: number;
+  imgUrl: string;
 }
 

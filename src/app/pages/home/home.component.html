@@ -21,5 +21,5 @@
 </div>
 
 <ng-template #dialog let-data>
-    <app-trip-details [flight]="data"></app-trip-details>
+    <app-trip-details [adults]="data.adults" [kids]="data.kids" [flight]="data.flight"></app-trip-details>
 </ng-template>

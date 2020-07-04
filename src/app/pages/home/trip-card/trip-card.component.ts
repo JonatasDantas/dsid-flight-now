@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Flight } from './trip.model';
+import { Flight } from '../../../models/flight.model';
 
 @Component({
   selector: 'app-trip-card',
@@ -8,7 +8,7 @@ import { Flight } from './trip.model';
 })
 export class TripCardComponent implements OnInit {
 
-  @Input() flight: any;
+  @Input() flight: Flight;
   favorited: boolean;
 
   constructor() { }
@@ -18,8 +18,12 @@ export class TripCardComponent implements OnInit {
   }
 
   getImagePath() {
-    return this.flight.imgName ? `/assets/img/${this.flight.imgName}.jpg` : "/assets/img/airplane.jpg";
+    if (this.flight.imgName) {
+      return this.flight.imgName ? `/assets/img/${this.flight.imgName}.jpg` : "/assets/img/airplane.jpg";
+    }
+    return this.flight.imgUrl
   }
+
 
   favorite() {
     this.favorited = !this.favorited;

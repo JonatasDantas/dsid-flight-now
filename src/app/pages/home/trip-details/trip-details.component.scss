@@ -1,0 +1,22 @@
+@import 'bootstrap/scss/bootstrap.scss';
+
+.crop {
+    height: 200px;
+    overflow: hidden;
+}
+
+.width-900 {
+    width: 900px;
+
+    img {
+        width: 100%;
+    }
+
+    hr {
+        margin: 0;
+    }
+}
+
+.bullet {
+    @extend .bg-light, .text-primary, .rounded-bottom, .py-1, .px-3, .mr-3
+}
