@@ -17,8 +17,8 @@ export class SearchCardComponent implements OnInit {
 
   @Output() submit = new EventEmitter<SearchOutput>();
   public filters = {
-    exitDate: new Date(),
-    backDate: new Date(),
+    exitDate: new Date(2020, 0, 1),
+    backDate: new Date(2021, 0, 1),
   };
 
   emit() {
