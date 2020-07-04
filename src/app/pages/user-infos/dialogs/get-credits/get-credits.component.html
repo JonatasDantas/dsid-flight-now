@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header p-2">Adquira mais créditos</div>
+    <div class="card-body p-3">
+        <label class="d-block" for="inputCredits">coloque a quantidade de créditos</label>
+        <input [formControl]="formCredit.get('valor')" id="inputCredits" nbInput type="text">
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-end">
+            <button [disabled]="formCredit.valid" nbButton status="primary">Obter créditos</button>
+        </div>
+    </div>
+</div>

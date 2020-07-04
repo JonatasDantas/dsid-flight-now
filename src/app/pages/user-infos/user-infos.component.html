@@ -28,7 +28,7 @@
             <div class="block">
                 <h4 class="mb-2">créditos</h4>
                 <p class="w-100 mb-1">{{ userService.userData.credits }}</p>
-                <a href="javascript:null">adquirir mais</a>
+                <a (click)="openDialogCredits()" href="javascript:null">adquirir mais</a>
             </div>
         </div>
         <hr *ngIf="editing">

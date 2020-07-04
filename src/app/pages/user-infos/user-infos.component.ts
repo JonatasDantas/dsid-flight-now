@@ -4,6 +4,8 @@ import { User, UserPut } from '../../models/usuario.model';
 import { FormBuilder, Validators, FormControl, FormGroup, AbstractControl } from '@angular/forms';
 import { UserService } from '../../@core/data/userService';
 import { UserInfosService } from './user-infos.service';
+import { NbDialogService } from '@nebular/theme';
+import { GetCreditsComponent } from './dialogs/get-credits/get-credits.component';
 
 @Component({
   selector: 'app-user-infos',
@@ -13,7 +15,11 @@ import { UserInfosService } from './user-infos.service';
 export class UserInfosComponent implements OnInit {
   loading: boolean;
 
-  constructor(private fb: FormBuilder, private userInfosService: UserInfosService, public userService: UserService) { }
+  constructor(
+    private fb: FormBuilder,
+    private userInfosService: UserInfosService,
+    public userService: UserService,
+    private dialogService: NbDialogService) { }
 
   formEdition = this.fb.group({
     value: ['', Validators.required],
@@ -48,6 +54,10 @@ export class UserInfosComponent implements OnInit {
         console.error(error);
       }
     )
+  }
+
+  openDialogCredits() {
+    this.dialogService.open(GetCreditsComponent)
   }
 
   alterar(field: keyof User) {
