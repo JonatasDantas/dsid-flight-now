@@ -49,10 +49,7 @@ export class TripDetailsComponent implements OnInit {
   }
 
   getImagePath() {
-    if (this.flight.imgName) {
-      return this.flight.imgName ? `/assets/img/${this.flight.imgName}.jpg` : "/assets/img/airplane.jpg";
-    }
-    return this.flight.imgUrl
+    return this.flight.imgUrl ? this.flight.imgUrl : "/assets/img/airplane.jpg";
   }
 
 

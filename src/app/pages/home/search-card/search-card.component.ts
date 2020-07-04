@@ -16,14 +16,18 @@ export class SearchCardComponent implements OnInit {
   constructor() { }
 
   @Output() submit = new EventEmitter<SearchOutput>();
+  public filters = {
+    exitDate: new Date(),
+    backDate: new Date(),
+  };
 
   emit() {
     this.submit.emit(
       {
-        exitDate: new Date(),
+        exitDate: this.filters.exitDate,
         adults: this.quantidadeAdultos,
         kids: this.quantidadeCriancas,
-        backDate: new Date(),
+        backDate: this.filters.backDate,
       }
     )
   }

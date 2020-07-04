@@ -3,14 +3,14 @@
 
                 <div class="form-field flex-fill mr-2">
                         <p>data de saída</p>
-                        <input fullWidth name="data-saida" placeholder="dia da saída" nbInput [nbDatepicker]="datepickerSaida">
+                        <input fullWidth [(ngModel)]="filters.exitDate" name="data-saida" placeholder="dia da saída" nbInput [nbDatepicker]="datepickerSaida">
                         <nb-datepicker #datepickerSaida></nb-datepicker>
                 </div>
 
                 <div class="form-field flex-fill mr-2">
                     
                         <p>data de saída</p>
-                        <input fullWidth placeholder="dia de retorno" name="data-volta" nbInput [nbDatepicker]="datepickerVolta">
+                        <input fullWidth [(ngModel)]="filters.backDate" placeholder="dia de retorno" name="data-volta" nbInput [nbDatepicker]="datepickerVolta">
                         <nb-datepicker #datepickerVolta></nb-datepicker>
                 </div>
 
