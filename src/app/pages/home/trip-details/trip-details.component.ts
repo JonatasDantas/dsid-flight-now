@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Flight } from '../../../models/flight.model';
 import { UserService } from '../../../@core/data/userService';
 
@@ -12,6 +12,7 @@ export class TripDetailsComponent implements OnInit {
   @Input() flight: Flight;
   @Input() adults: number;
   @Input() kids: number;
+  @Output() adquirirCreditos: EventEmitter<void> = new EventEmitter();
 
   get credits() {
     return this.userService.userData.credits
@@ -57,6 +58,10 @@ export class TripDetailsComponent implements OnInit {
 
   calculatePrice() {
     return this.flight.cost * (this.adults + this.kids / 2)
+  }
+
+  adquirirMaisEmit() {
+    this.adquirirCreditos.emit()
   }
 
 }

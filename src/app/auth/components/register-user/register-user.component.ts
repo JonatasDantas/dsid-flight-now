@@ -32,6 +32,8 @@ export class RegisterUserComponent implements OnInit, OnDestroy {
             username: [null, Validators.required],
             password: [null, Validators.required],
             email: [null, Validators.required],
+            born_date: [null, Validators.required],
+
         });
     }
 

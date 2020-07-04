@@ -73,11 +73,28 @@
                       </p>
                     </ng-container>
                 </div>
+
+
+                <div class="form-group col-6">
+                    <label class="label" for="born_date">Data de nascimento
+                        <span class="label-rfi">*</span>
+                    </label>
+                    <input nbInput fullWidth type="date" class="form-control" name="password" id="password"
+                    aria-describedby="nameHelp" formControlName="born_date">
+                    <ng-container *ngIf="form.get('born_date').invalid && form.get('born_date').touched">
+                      <p class="caption status-danger">
+                         Data de nascimento é obrigatória
+                      </p>
+                    </ng-container>
+                </div>
+
+
+
             </div>
 
             <div class="row float-right mr-0 mt-4">
                 <button nbButton class="" status="danger" size="medium" (click)="onReturn()">Cancelar</button>
-                <button nbButton class="ml-3" status="success" size="medium" [disabled]="submitted" (click)="onSubmit()">
+                <button nbButton class="ml-3" status="success" size="medium" [disabled]="submitted || form.invalid" (click)="onSubmit()">
                   <i [hidden]="!submitted" class="fa fa-spinner fa-pulse loading"></i>
                   <span>Salvar</span>
                 </button>

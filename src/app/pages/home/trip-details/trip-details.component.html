@@ -25,15 +25,24 @@
                     class="text-bold">{{ calculatePrice() | currency:'BRL':true }}</h3>
                 </div>
                 <div class="border-left ml-5 position-relative">
-                    <div class="ml-3 position-absolute" style="bottom: 0">
-                        <h5><small><strong>Saldo atual:</strong></small></h5>
-                        <h4 class="text-bold text-success">{{ userCredits | currency:'BRL':true }}</h4>
+                    <div class="ml-3 position-absolute" style="bottom: 0; min-width: 120px;">
+                        <h6 class="mb-1"><small><strong>Saldo atual:</strong></small></h6>
+                        <h5 [ngClass]="{ 'text-success': saldoPositivo, 'text-danger': !saldoPositivo}" class="text-bold text-success">{{ userCredits | currency:'BRL':true }}</h5>
                     </div>
                 </div>
             </div>
-            <div>
-                <button status="primary" nbButton>Comprar</button>
+            <div 
+            nbPopoverTrigger="hover"
+            [nbPopover]="!saldoPositivo && hoverDisabled">
+                <button [disabled]="!saldoPositivo" status="primary" nbButton>Comprar</button>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #hoverDisabled>
+    <div class="p-3">
+
+        <span>Saldo insuficiente, adquira mais dinheiros <a href="javascript:null" (click)="adquirirMaisEmit()">aqui</a></span>
+    </div>
+</ng-template>
