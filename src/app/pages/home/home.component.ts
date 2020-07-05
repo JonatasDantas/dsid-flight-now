@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.divColumns = document.getElementsByClassName('columns');
     this.divColumns[0].classList.add('home-page');
 
-    this.flightService.getFlights().pipe(
+    this.flightService.getFlights(null, null).pipe(
       untilDestroyed(this),
       finalize(() => this.isLoading = false),
     ).subscribe({
@@ -45,8 +45,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   submit(e: SearchOutput, dialog: TemplateRef<any>) {
-    this.adults = e.adults;
-    this.kids = e.kids;
+    console.log(e);
+    return this.flightService.getFlights(e.exitDate, e.backDate).pipe(
+      untilDestroyed(this),
+      finalize(() => this.isLoading = false),
+    ).subscribe({
+      next: (response) => {
+        this.flights = response;
+
+        console.log(this.flights);
+      }
+    });
   }
 
   openDialog(dialog: TemplateRef<any>, flight: Flight) {

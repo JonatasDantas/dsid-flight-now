@@ -21,11 +21,15 @@ export class FlightService implements OnDestroy {
         })
     };
 
-    getFlights(): Observable<{flights: any[]}> {
+    getFlights(exitDate, backDate): Observable<{flights: any[]}> {
         const apiPath = 'voos';
+        const params = {
+            exitDate: `${exitDate}`,
+            backDate: `${backDate}`,
+        };
 
         return this.http.get<{flights: any[]}>(
-            this.apiBase + apiPath, this.httpOptions,
+            this.apiBase + apiPath, {...this.httpOptions, params},
         ).pipe(
             untilDestroyed(this),
             map(response => {

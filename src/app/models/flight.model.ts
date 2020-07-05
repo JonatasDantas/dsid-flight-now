@@ -6,7 +6,6 @@ export interface Flight {
   originCity: string;
   destinyCity: string;
   maxPassengers: string;
-  imgName: string;
   previstDate: string;
   cost: number;
   imgUrl: string;
