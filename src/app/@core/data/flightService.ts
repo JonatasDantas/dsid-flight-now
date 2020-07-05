@@ -3,15 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorage } from 'ngx-store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { UserService } from './userService';
+import { Compra } from '../../models/compra.model';
+import { User } from '../../models/usuario.model';
+import { environment } from '../../../environments/environment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FlightService implements OnDestroy {
+
+    @LocalStorage() token;
+
     constructor(
         private http: HttpClient,
-    ) {}
-
-    @LocalStorage() private token: string;
+        private userService: UserService,
+    ) { }
 
     private apiBase = 'http://localhost:4300/';
     private httpOptions = {
@@ -21,16 +29,17 @@ export class FlightService implements OnDestroy {
         })
     };
 
-    getFlights(exitDate, backDate): Observable<{flights: any[]}> {
+    getFlights(exitDate, backDate): Observable<{ flights: any[] }> {
         const apiPath = 'voos';
         const params = {
             exitDate: `${exitDate}`,
             backDate: `${backDate}`,
         };
 
-        return this.http.get<{flights: any[]}>(
-            this.apiBase + apiPath, {...this.httpOptions, params},
+        return this.http.get<{ flights: any[] }>(
+            this.apiBase + apiPath, { ...this.httpOptions, params },
         ).pipe(
+            tap(console.log),
             untilDestroyed(this),
             map(response => {
                 return response;
@@ -38,5 +47,17 @@ export class FlightService implements OnDestroy {
         );
     }
 
-    ngOnDestroy() {}
+    buyFlight(compra: Compra) {
+        return this.http.post<{ compra: Compra, usuario: User }>(
+            `${environment.apiBase}usuarios/${this.userService.userData.id}/voos`,
+            compra,
+            {
+                headers: {
+                    Authorization: 'Bearer ' + this.token
+                }
+            }
+        )
+    }
+
+    ngOnDestroy() { }
 }

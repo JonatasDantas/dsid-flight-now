@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbDatepickerModule, NbDialogModule, NbDialogConfig, NbPopoverModule } from '@nebular/theme';
+import { NbCardModule, NbDatepickerModule, NbDialogModule, NbDialogConfig, NbPopoverModule, NbSpinnerModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { HomeComponent } from './home.component';
@@ -14,6 +14,7 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
     ThemeModule,
     NbDatepickerModule,
     NbPopoverModule,
+    NbSpinnerModule,
     NbDialogModule.forChild(),
   ],
   declarations: [

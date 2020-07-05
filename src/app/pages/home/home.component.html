@@ -4,7 +4,7 @@
     </div>
     
     <div class="container mt-1">
-        <app-search-card (submit)="submit($event, dialog)">
+        <app-search-card (submit)="submit($event)">
         </app-search-card>
     </div>
 
@@ -21,5 +21,14 @@
 </div>
 
 <ng-template #dialog let-data>
-    <app-trip-details [adults]="data.adults" [kids]="data.kids" [flight]="data.flight"></app-trip-details>
+    <app-trip-details (confirm)="closeDialog(popupSuccess)" [adults]="data.adults" [kids]="data.kids" [flight]="data.flight"></app-trip-details>
+</ng-template>
+
+<ng-template #popupSuccess>
+    <div class="card p-4">
+        <h6 class="mb-4">Passagem Comprada com sucesso!</h6>
+        <button class="d-inline" (click)="closeSuccessModal()" class="btn btn-primary">
+            Massa!
+        </button>
+    </div>
 </ng-template>

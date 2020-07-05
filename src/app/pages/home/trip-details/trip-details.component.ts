@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Flight } from '../../../models/flight.model';
 import { UserService } from '../../../@core/data/userService';
+import { FlightService } from '../../../@core/data/flightService';
 
 @Component({
   selector: 'app-trip-details',
@@ -9,10 +10,13 @@ import { UserService } from '../../../@core/data/userService';
 })
 export class TripDetailsComponent implements OnInit {
 
+  loading = false;
+
   @Input() flight: Flight;
   @Input() adults: number;
   @Input() kids: number;
   @Output() adquirirCreditos: EventEmitter<void> = new EventEmitter();
+  @Output() confirm = new EventEmitter()
 
   get credits() {
     return this.userService.userData.credits
@@ -41,7 +45,9 @@ export class TripDetailsComponent implements OnInit {
   }
 
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private flightService: FlightService) { }
 
   ngOnInit(): void {
     console.log(this.flight);
@@ -59,6 +65,28 @@ export class TripDetailsComponent implements OnInit {
 
   adquirirMaisEmit() {
     this.adquirirCreditos.emit()
+  }
+
+  comprarVoo() {
+    this.loading = true;
+    this.flightService.buyFlight({
+      adultos: this.adults,
+      criancas: this.kids,
+      poltrona: 4,
+      vooId: this.flight.id,
+      usuarioId: this.userService.userData.id
+    }).subscribe(
+      data => {
+        console.log(data);
+        this.loading = false;
+        this.userService.setUser(data.usuario)
+        this.confirm.emit();
+      },
+      error => {
+        console.error(error);
+        this.loading = false;
+      }
+    )
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="card width-900" size="large">
+<div [nbSpinner]="loading" class="card width-900" size="large">
     <div>
         <div class="crop">
             <img class="card-image-top" [src]="getImagePath()" alt="">
@@ -34,7 +34,7 @@
             <div 
             nbPopoverTrigger="hover"
             [nbPopover]="!saldoPositivo && hoverDisabled">
-                <button [disabled]="!saldoPositivo" status="primary" nbButton>Comprar</button>
+                <button (click)="comprarVoo()" [disabled]="!saldoPositivo" status="primary" nbButton>Comprar</button>
             </div>
         </div>
     </div>

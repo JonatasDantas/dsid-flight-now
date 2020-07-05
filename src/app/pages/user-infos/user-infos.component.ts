@@ -14,6 +14,7 @@ import { GetCreditsComponent } from './dialogs/get-credits/get-credits.component
 })
 export class UserInfosComponent implements OnInit {
   loading: boolean;
+  dialog: any;
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +58,11 @@ export class UserInfosComponent implements OnInit {
   }
 
   openDialogCredits() {
-    this.dialogService.open(GetCreditsComponent)
+    const dialog = this.dialogService.open(GetCreditsComponent)
+
+    dialog.componentRef.instance.complete.emit = () => {
+      dialog.close()
+    }
   }
 
   alterar(field: keyof User) {

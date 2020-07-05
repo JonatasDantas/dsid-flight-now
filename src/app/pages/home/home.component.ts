@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { FlightService } from '../../@core/data/flightService';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { finalize } from 'rxjs/operators';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService, NbDialogRef } from '@nebular/theme';
 import { Flight } from '../../models/flight.model';
 import { FormBuilder } from '@angular/forms';
 import { SearchOutput } from './search-card/search-card.component';
+import { TripDetailsComponent } from './trip-details/trip-details.component';
 
 @Component({
   selector: 'app-ngx-home',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   adults: number;
   kids: number;
+  dialog: NbDialogRef<TripDetailsComponent>;
+  successDialog: NbDialogRef<unknown>;
 
   constructor(
     private fb: FormBuilder,
@@ -44,15 +47,24 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(e: SearchOutput, dialog: TemplateRef<any>) {
+  closeSuccessModal() {
+    this.successDialog.close()
+  }
+
+  openSuccessModal(popup: any) {
+    this.successDialog = this.dialogService.open(popup)
+  }
+
+  submit(e: SearchOutput) {
     console.log(e);
     return this.flightService.getFlights(e.exitDate, e.backDate).pipe(
       untilDestroyed(this),
       finalize(() => this.isLoading = false),
     ).subscribe({
       next: (response) => {
+        this.adults = e.adults;
+        this.kids = e.kids
         this.flights = response;
-
         console.log(this.flights);
       }
     });
@@ -60,13 +72,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   openDialog(dialog: TemplateRef<any>, flight: Flight) {
 
-    this.dialogService.open(dialog, {
+    this.dialog = this.dialogService.open(dialog, {
       context: {
         flight,
         adults: this.adults,
         kids: this.kids
       }
     })
+  }
+
+  closeDialog(popup: any) {
+    this.openSuccessModal(popup)
+    this.dialog.close();
   }
 
   ngOnDestroy(){

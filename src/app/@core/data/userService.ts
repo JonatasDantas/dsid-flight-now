@@ -13,7 +13,9 @@ interface userServiceOptions {
     authPath?: string;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UserService implements OnDestroy {
     constructor(
         private http: HttpClient,
