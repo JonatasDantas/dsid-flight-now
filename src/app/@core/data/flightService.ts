@@ -8,6 +8,7 @@ import { UserService } from './userService';
 import { Compra } from '../../models/compra.model';
 import { User } from '../../models/usuario.model';
 import { environment } from '../../../environments/environment';
+import { Flight } from '../../models/flight.model';
 
 @Injectable({
     providedIn: 'root'
@@ -45,6 +46,17 @@ export class FlightService implements OnDestroy {
                 return response;
             })
         );
+    }
+
+    getUserFlights(userId: number) {
+        return this.http.get<(Compra & Flight)[]>(
+            environment.apiBase + `usuarios/${userId}/voos`,
+            {
+                headers: {
+                    Authorization: 'Bearer ' + this.token
+                }
+            }
+        )
     }
 
     buyFlight(compra: Compra) {

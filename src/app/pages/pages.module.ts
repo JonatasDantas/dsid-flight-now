@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlightService } from '../@core/data/flightService';
 import { LOCALE_ID } from '@angular/core';
 import { GetCreditsComponent } from './user-infos/dialogs/get-credits/get-credits.component';
+import { UserFlightsComponent } from './user-flights/user-flights.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { GetCreditsComponent } from './user-infos/dialogs/get-credits/get-credit
     PagesComponent,
     UserInfosComponent,
     GetCreditsComponent,
+    UserFlightsComponent,
   ],
   providers: [UserService, FlightService, {provide: LOCALE_ID, useValue: 'pt-BR'}]
 })
