@@ -4,12 +4,14 @@
     </div>
     
     <div class="container mt-1">
-        <app-search-card (submit)="submit($event)">
-        </app-search-card>
+        <div [nbSpinner]="isLoading" >
+            <app-search-card (submit)="submit($event)">
+            </app-search-card>
+        </div>
     </div>
 
 
-<div class="container container-bigger d-flex flex-wrap align-content-stretch">
+<div class="container container-bigger d-flex flex-wrap justify-content-center align-content-center">
     <div *ngFor="let item of flights">
         <div class="mx-2 mb-4">
             <app-trip-card 

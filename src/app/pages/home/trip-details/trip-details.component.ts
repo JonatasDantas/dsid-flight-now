@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Flight } from '../../../models/flight.model';
 import { UserService } from '../../../@core/data/userService';
 import { FlightService } from '../../../@core/data/flightService';
+import { NbDialogService } from '@nebular/theme';
+import { GetCreditsComponent } from '../../user-infos/dialogs/get-credits/get-credits.component';
 
 @Component({
   selector: 'app-trip-details',
@@ -46,6 +48,7 @@ export class TripDetailsComponent implements OnInit {
 
 
   constructor(
+    private dialogService: NbDialogService,
     private userService: UserService,
     private flightService: FlightService) { }
 
@@ -64,7 +67,13 @@ export class TripDetailsComponent implements OnInit {
   }
 
   adquirirMaisEmit() {
-    this.adquirirCreditos.emit()
+    
+    const dialog = this.dialogService.open(GetCreditsComponent)
+
+    dialog.componentRef.instance.complete.emit = () => {
+      dialog.close()
+    }
+
   }
 
   comprarVoo() {

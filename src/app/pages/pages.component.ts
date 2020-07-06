@@ -20,8 +20,9 @@ export class PagesComponent implements OnInit {
   userMenu = [{ title: 'Sair' }];
 
   items = [
-    {title: 'minha conta'},
-    {title: 'encerrar sessão'}
+    { title: 'minha conta' },
+    { title: 'minhas passagens' },
+    { title: 'encerrar sessão' }
   ]
 
   constructor(
@@ -44,6 +45,9 @@ export class PagesComponent implements OnInit {
         case 'encerrar sessão':
           this.userService.logout();
           this.router.navigate(['auth']);
+          break;
+        case 'minhas passagens':
+          this.router.navigate(['pages/user-flights'])
           break;
           
         

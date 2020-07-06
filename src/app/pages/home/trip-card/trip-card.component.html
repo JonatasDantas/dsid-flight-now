@@ -7,13 +7,24 @@
         <div class="card-info">
             <div class="airports">{{flight.origin}} | {{flight.destiny}}</div>
         </div>
+
+        <div class="bg-light p-1 px-3 card-info">
+            <span class="text-tiny">
+                <strong>embarque: </strong>{{ flight.previstDate | date }} às
+                {{ flight.previstDate | date:"HH'h'mm" }}
+            </span> 
+        </div>
  
         <div class="footer d-flex justify-content-between">
+
+            
             <!-- <button nbButton status="primary">Voar</button> -->
             <div class="pricing">{{ flight.cost | currency:'BRL':true}}</div>
             <div class="align-self-center">
                 <nb-icon  (click)="favorite()" [icon]="favorited ? 'heart' : 'heart-outline'"></nb-icon>
             </div>
+
+           
   
         </div>
     </div>

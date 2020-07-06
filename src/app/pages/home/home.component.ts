@@ -7,6 +7,7 @@ import { Flight } from '../../models/flight.model';
 import { FormBuilder } from '@angular/forms';
 import { SearchOutput } from './search-card/search-card.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-ngx-home',
@@ -57,6 +58,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   submit(e: SearchOutput) {
     console.log(e);
+    
+    this.isLoading = true
     return this.flightService.getFlights(e.exitDate, e.backDate).pipe(
       untilDestroyed(this),
       finalize(() => this.isLoading = false),
