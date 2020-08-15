@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Flight } from '../../../models/flight.model';
+import { Cotacao } from '../../../skyscanner-api/skyscanner.model';
 
 @Component({
   selector: 'app-trip-card',
@@ -8,8 +9,9 @@ import { Flight } from '../../../models/flight.model';
 })
 export class TripCardComponent implements OnInit {
 
-  @Input() flight: Flight;
+  @Input() flight: Cotacao;
   favorited: boolean;
+  ida: boolean = true;
 
   constructor() { }
 
@@ -18,9 +20,12 @@ export class TripCardComponent implements OnInit {
   }
 
   getImagePath() {
-    return this.flight.imgUrl ? this.flight.imgUrl : "/assets/img/airplane.jpg";
+    return "/assets/img/airplane.jpg";
   }
 
+  revelaVolta(boolean: boolean) {    
+    this.ida = !boolean;
+  }
 
   favorite() {
     this.favorited = !this.favorited;

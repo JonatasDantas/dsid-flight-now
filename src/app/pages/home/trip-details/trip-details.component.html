@@ -4,19 +4,33 @@
             <img class="card-image-top" [src]="getImagePath()" alt="">
         </div>
         <div class="p-4">
-            <h3> Conheça {{ flight.originCity }} </h3>
-            <h5 class="text-secondary font-weight-lighter">{{ flight.origin }} &rarr; {{ flight.destiny }}</h5>
+            <h3 >
+                        {{ flight.ida.cidadeSaida }}
+                <strong>({{ flight.ida.codigoAeroportoSaida }})</strong> 
+                &rarr;  {{ flight.ida.cidadeChegada }}
+                <strong>({{ flight.ida.codigoAeroportoChegada }})</strong> 
+            </h3>
+            <h5 class="mb-4 text-secondary">Oferecido por {{ flight.companhiaAerea }}</h5>
+
+            <div class="d-flex">
+                <div class="border-right pr-3 pt-3 flex-fill">
+                    <h5 class="mb-0">Ida</h5>
+                    <p class="mb-2 font-weight-bold">dia {{ flight.ida.dataSaida | date }}</p>
+
+                    <p class="mb-2 small">embarque em <br><strong> aeroporto {{ flight.ida.aeroportoSaida }}</strong> </p>
+                    <p class="small">desembarque em <br><strong> aeroporto {{ flight.ida.aeroportoChegada }}</strong> </p>
+                </div>
+                <div class="ml-3 pt-3 flex-fill" *ngIf="!flight.soIda">
+                    <h5 class="mb-0">Volta</h5>
+                    <p class="mb-2 font-weight-bold">dia {{ flight.volta.dataSaida | date }}</p>
+
+                    <p class="mb-2 small">embarque em <br><strong> aeroporto {{ flight.volta.aeroportoSaida }}</strong> </p>
+                    <p class="small">desembarque em <br><strong> aeroporto {{ flight.volta.aeroportoChegada }}</strong> </p>
+                </div>
+            </div>
+            
         </div>
         <hr>
-        <div class="d-flex justify-content-end">
-            <span class="bullet">
-                <nb-icon icon="paper-plane-outline"></nb-icon> 
-                Você irá partir em <strong>{{ flight.destinyAddress }}</strong>,
-                dia 
-                <strong>{{ flight.previstDate | date }}</strong> às 
-                <strong>{{ flight.previstDate | date:"HH'h'mm"}}</strong>                
-                </span>
-        </div>
         <div class="d-flex p-3 justify-content-between align-items-end">
             <div class="d-flex">
                 <div>

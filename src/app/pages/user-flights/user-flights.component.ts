@@ -5,6 +5,7 @@ import { Flight } from '../../models/flight.model';
 import { Compra } from '../../models/compra.model';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Cotacao } from '../../skyscanner-api/skyscanner.model';
 
 @Component({
   selector: 'app-user-flights',

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorage, LocalStorageService } from 'ngx-store';
 import { User } from '../../models/usuario.model';
+import { environment } from '../../../environments/environment';
 
 interface userServiceOptions {
     apiBase: string;
@@ -21,7 +22,6 @@ export class UserService implements OnDestroy {
         private http: HttpClient,
     ) {}
 
-    private apiBase = 'http://localhost:4300/';
     private apiPath = '';
     private authenticatedSubject = new Subject<any>();
     private httpOptions = {
@@ -44,7 +44,7 @@ export class UserService implements OnDestroy {
         };
 
         return this.http.post<{token: string, user:User}>(
-            this.apiBase + apiPath, params, this.httpOptions,
+            environment.apiBase + apiPath, params, this.httpOptions,
         ).pipe(
             untilDestroyed(this),
             map(response => {
@@ -70,7 +70,7 @@ export class UserService implements OnDestroy {
         let apiPath = 'usuarios';
 
         return this.http.post<any>(
-            this.apiBase + apiPath, data, this.httpOptions, 
+            environment.apiBase + apiPath, data, this.httpOptions, 
         ).pipe(
             untilDestroyed(this),
             map(response => {

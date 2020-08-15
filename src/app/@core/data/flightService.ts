@@ -22,7 +22,6 @@ export class FlightService implements OnDestroy {
         private userService: UserService,
     ) { }
 
-    private apiBase = 'http://localhost:4300/';
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -38,7 +37,7 @@ export class FlightService implements OnDestroy {
         };
 
         return this.http.get<{ flights: any[] }>(
-            this.apiBase + apiPath, { ...this.httpOptions, params },
+            environment.apiBase + apiPath, { ...this.httpOptions, params },
         ).pipe(
             tap(console.log),
             untilDestroyed(this),

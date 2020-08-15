@@ -1,31 +1,52 @@
-
 <div class="card" style="width:260px;">
-    <img class="card-img-top" [src]="getImagePath()" [alt]="flight.origin">
+    <img class="card-img-top" [src]="getImagePath()" [alt]="flight.ida.cidadeChegada">
     <div class="card-body d-flex flex-column justify-content-between" style="height: 300px;">
-        <h4 class="card-title">{{flight.originCity}} - {{flight.destinyCity}}</h4>
-
-        <div class="card-info">
-            <div class="airports">{{flight.origin}} | {{flight.destiny}}</div>
+        <div>
+            <h5 class="mb-0 mt-2 text-center">
+                {{flight.ida.cidadeSaida}}
+            </h5>
+            <h5 class="text-center">
+                {{flight.ida.cidadeChegada}}
+            </h5>
         </div>
+
 
         <div class="bg-light p-1 px-3 card-info">
-            <span class="text-tiny">
-                <strong>embarque: </strong>{{ flight.previstDate | date }} às
-                {{ flight.previstDate | date:"HH'h'mm" }}
-            </span> 
+            <p [class.text-primary]="!ida" class="text-tiny mb-1 d-flex justify-content-between">
+                <span><strong>embarque </strong>{{ ida ?( flight.ida.dataSaida | date ): flight.volta?.dataSaida | date}}</span>
+                  <nb-icon
+                    *ngIf="flight.volta"
+                    (mouseenter)="revelaVolta(true)"
+                    (mouseleave)="revelaVolta(false)"
+                    nbPopover="mostrando volta" 
+                    nbPopoverTrigger="hover" 
+                    nbPopoverPlacement="top" 
+                    icon="eye"></nb-icon>
+              
+
+            </p>
+            <p [class.text-primary]="!ida" class="text-tiny mb-3">
+                aeroporto {{ida ? flight.ida.aeroportoSaida : flight.volta?.aeroportoSaida || 'viagem só ida'}}
+            </p>
+            <p [class.text-primary]="!ida" class="text-tiny mb-1">
+                <strong>desembarque </strong>
+            </p>
+            <p [class.text-primary]="!ida" class="text-tiny mb-1">
+                aeroporto {{ida ? flight.ida.aeroportoChegada : flight.volta?.aeroportoChegada }}
+            </p>
         </div>
- 
+
         <div class="footer d-flex justify-content-between">
 
-            
+
             <!-- <button nbButton status="primary">Voar</button> -->
-            <div class="pricing">{{ flight.cost | currency:'BRL':true}}</div>
+            <div class="pricing">{{ flight.precoAdulto | currency:'BRL':true}}</div>
             <div class="align-self-center">
-                <nb-icon  (click)="favorite()" [icon]="favorited ? 'heart' : 'heart-outline'"></nb-icon>
+                <nb-icon (click)="favorite()" [icon]="favorited ? 'heart' : 'heart-outline'"></nb-icon>
             </div>
 
-           
-  
+
+
         </div>
     </div>
 </div>

@@ -1,51 +1,88 @@
 <div class="card card-body mb-4 border border-primary">
-            <div class="d-flex flex-wrap justify-content-end">
+    <div class="d-flex flex-wrap justify-content-end mb-3">
+        <div class="form-field flex-fill mr-2">
+            <p >Origem  </p>
+            <input fullWidth [formControl]="exitLocation" nbInput type="text" placeholder="Insira seu local de origem"
+                [nbAutocomplete]="Origem"/>
 
-                <div class="form-field flex-fill mr-2">
-                        <p>data de saída</p>
-                        <input fullWidth [(ngModel)]="filters.exitDate" name="data-saida" placeholder="dia da saída" nbInput [nbDatepicker]="datepickerSaida">
-                        <nb-datepicker #datepickerSaida></nb-datepicker>
-                </div>
+            <nb-autocomplete [activeFirst]="true"  #Origem>
+                <nb-option-group [nbSpinner]="loadingPlaces" 
+                    *ngFor="let group of (filteredExitLocation$ | async); trackBy: trackByExit" [title]="group.name">
+                    <nb-option *ngFor="let option of group.children" [value]="option.name + ' - ' + option.codigo">
+                        {{ option.name }}
+                    </nb-option>
+                </nb-option-group>
+            </nb-autocomplete>
+        </div>
 
-                <div class="form-field flex-fill mr-2">
-                    
-                        <p>data de saída</p>
-                        <input fullWidth [(ngModel)]="filters.backDate" placeholder="dia de retorno" name="data-volta" nbInput [nbDatepicker]="datepickerVolta">
-                        <nb-datepicker #datepickerVolta></nb-datepicker>
-                </div>
+        <div class="form-field flex-fill mr-2">
+            <p>Destino</p>
+            <input fullWidth [formControl]="backLocation" nbInput type="text" placeholder="Insira seu local de volta"
+                [nbAutocomplete]="Volta"/>
 
-                <div class="form-field flex-fill mr-2">
-                    
-                    <p>adultos</p>
-                    <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeAdultos">
-                        <nb-option [value]="1">1</nb-option>
-                        <nb-option [value]="2">2</nb-option>
-                        <nb-option [value]="3">3</nb-option>
-                        <nb-option [value]="4">4</nb-option>
-                        <nb-option [value]="5">5</nb-option>
-                        <nb-option [value]="6">6</nb-option>
-                      </nb-select>
-                </div>
+            <nb-autocomplete [activeFirst]="true" #Volta>
+                <nb-option-group [nbSpinner]="loadingPlaces"
+                    *ngFor="let group of (filteredArriveLocation$ | async); trackBy: trackByArrive" [title]="group.name">
+                    <nb-option *ngFor="let option of group.children" [value]="option.name + ' - ' + option.codigo">
+                        {{ option.name }}
+                    </nb-option>
+                </nb-option-group>
+            </nb-autocomplete>
+        </div>
 
-                <div class="form-field flex-fill mr-2">
-                    
-                    <p>crianças</p>
-                    <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeCriancas">
-                        <nb-option [value]="0">0</nb-option>
-                        <nb-option [value]="1">1</nb-option>
-                        <nb-option [value]="2">2</nb-option>
-                        <nb-option [value]="3">3</nb-option>
-                        <nb-option [value]="4">4</nb-option>
-                        <nb-option [value]="5">5</nb-option>
-                        <nb-option [value]="6">6</nb-option>
-                      </nb-select>
-                </div>
+    </div>
 
-                <div class="form-field align-self-end mt-3 mr-2">
-                    <button nbButton (click)="emit()" status="primary">Voar!</button>
-                </div>
+    <div class="d-flex flex-wrap justify-content-end">
+
+        <div class="form-field flex-fill mr-2">
+            <p class="d-flex justify-content-between">data de saída <span class="mr-1">só ida <input [(ngModel)]="soIda" type="checkbox" /></span></p>
+            <input fullWidth [(ngModel)]="filters.exitDate" name="data-saida" placeholder="dia da saída" nbInput
+                [nbDatepicker]="datepickerSaida">
+            <nb-datepicker #datepickerSaida></nb-datepicker>
+        </div>
+
+        <div class="form-field flex-fill mr-2">
+
+            <p>data de volta </p>
+            <input fullWidth [attr.disabled]="soIda || null" [(ngModel)]="filters.backDate" placeholder="dia de retorno" name="data-volta" nbInput
+                [nbDatepicker]="datepickerVolta">
+            <nb-datepicker #datepickerVolta></nb-datepicker>
+        </div>
+
+        <div class="form-field flex-fill mr-2">
+
+            <p>adultos</p>
+            <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeAdultos">
+                <nb-option [value]="1">1</nb-option>
+                <nb-option [value]="2">2</nb-option>
+                <nb-option [value]="3">3</nb-option>
+                <nb-option [value]="4">4</nb-option>
+                <nb-option [value]="5">5</nb-option>
+                <nb-option [value]="6">6</nb-option>
+            </nb-select>
+        </div>
+
+        <div class="form-field flex-fill mr-2">
+
+            <p>crianças</p>
+            <nb-select fullWidth placeholder="Select Showcase" [(selected)]="quantidadeCriancas">
+                <nb-option [value]="0">0</nb-option>
+                <nb-option [value]="1">1</nb-option>
+                <nb-option [value]="2">2</nb-option>
+                <nb-option [value]="3">3</nb-option>
+                <nb-option [value]="4">4</nb-option>
+                <nb-option [value]="5">5</nb-option>
+                <nb-option [value]="6">6</nb-option>
+            </nb-select>
+        </div>
+
+        <div class="form-field align-self-end mt-3 mr-2">
+            <button 
+            [disabled]="!checkTudoOk()"
+            nbButton (click)="emit()" status="primary">Voar!</button>
+        </div>
 
 
-            </div>
+    </div>
 
 </div>

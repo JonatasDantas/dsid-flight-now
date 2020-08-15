@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { SearchOutput } from './search-card/search-card.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { start } from 'repl';
+import { SkyscannerService } from '../../skyscanner-api/skyscanner.service';
 
 @Component({
   selector: 'app-ngx-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private flightService: FlightService,
+    private skyscannerService: SkyscannerService,
     private dialogService: NbDialogService,
   ) { }
 
@@ -57,20 +59,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   submit(e: SearchOutput) {
+
     console.log(e);
-    
+    const { adults, kids, exitDate, backLocation, exitLocation, backDate, soIda } = e;
+
+
     this.isLoading = true
-    return this.flightService.getFlights(e.exitDate, e.backDate).pipe(
-      untilDestroyed(this),
-      finalize(() => this.isLoading = false),
-    ).subscribe({
-      next: (response) => {
-        this.adults = e.adults;
-        this.kids = e.kids
-        this.flights = response;
-        console.log(this.flights);
-      }
-    });
+    return this.skyscannerService.getMock(
+      // exitLocation,
+      // backLocation,
+      // exitDate.toISOString().substring(0, 10),
+      // soIda ? null : backDate.toISOString().substring(0, 10)
+    )
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => this.isLoading = false),
+      ).subscribe({
+        next: (response) => {
+          this.adults = adults;
+          this.kids = kids
+          this.flights = response;
+          console.log(this.flights);
+        }
+      });
   }
 
   openDialog(dialog: TemplateRef<any>, flight: Flight) {
@@ -89,8 +100,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dialog.close();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.divColumns[0].classList.remove('home-page');
   }
- 
+
 }

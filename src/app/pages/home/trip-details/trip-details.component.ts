@@ -4,6 +4,8 @@ import { UserService } from '../../../@core/data/userService';
 import { FlightService } from '../../../@core/data/flightService';
 import { NbDialogService } from '@nebular/theme';
 import { GetCreditsComponent } from '../../user-infos/dialogs/get-credits/get-credits.component';
+import { Cotacao } from '../../../skyscanner-api/skyscanner.model';
+import { SkyscannerService } from '../../../skyscanner-api/skyscanner.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -14,7 +16,7 @@ export class TripDetailsComponent implements OnInit {
 
   loading = false;
 
-  @Input() flight: Flight;
+  @Input() flight: Cotacao;
   @Input() adults: number;
   @Input() kids: number;
   @Output() adquirirCreditos: EventEmitter<void> = new EventEmitter();
@@ -43,14 +45,15 @@ export class TripDetailsComponent implements OnInit {
   }
 
   get saldoPositivo() {
-    return this.credits >= this.flight.cost;
+    return this.credits >= this.calculatePrice();
   }
 
 
   constructor(
     private dialogService: NbDialogService,
     private userService: UserService,
-    private flightService: FlightService) { }
+    private flightService: FlightService,
+    private skyscannerService: SkyscannerService) { }
 
   ngOnInit(): void {
     console.log(this.flight);
@@ -63,7 +66,7 @@ export class TripDetailsComponent implements OnInit {
 
 
   calculatePrice() {
-    return this.flight.cost * (this.adults + this.kids / 2)
+    return this.flight.precoAdulto * this.adults + this.flight.precoMeia * this.kids
   }
 
   adquirirMaisEmit() {
@@ -78,11 +81,16 @@ export class TripDetailsComponent implements OnInit {
 
   comprarVoo() {
     this.loading = true;
-    this.flightService.buyFlight({
+    this.skyscannerService.buyFlight({
       adultos: this.adults,
       criancas: this.kids,
-      poltrona: 4,
-      vooId: this.flight.id,
+      aeroportoChegada: this.flight.ida.aeroportoChegada,
+      aeroportoSaida: this.flight.ida.aeroportoSaida,
+      codigoAeroportoSaida: this.flight.ida.aeroportoSaida,
+      codigoAeroportoChegada: this.flight.ida.aeroportoSaida,
+      dataSaida: this.flight.ida.dataSaida,
+      dataVolta: this.flight.volta.dataSaida,
+      precoVoo: this.flight.precoAdulto,
       usuarioId: this.userService.userData.id
     }).subscribe(
       data => {
