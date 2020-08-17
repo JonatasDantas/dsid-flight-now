@@ -61,7 +61,7 @@ export class TripDetailsComponent implements OnInit {
   }
 
   getImagePath() {
-    return this.flight.imgUrl ? this.flight.imgUrl : "/assets/img/airplane.jpg";
+    return "/assets/img/airplane.jpg";
   }
 
 

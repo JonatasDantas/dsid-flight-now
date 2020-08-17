@@ -8,14 +8,15 @@ import { of } from 'rxjs/internal/observable/of';
 import { Compra, CompraSkyscanner } from '../models/compra.model';
 import { environment } from '../../environments/environment';
 import { User } from '../models/usuario.model';
+import { UserService } from '../@core/data/userService';
 
 
 @Injectable({ providedIn: 'root' })
 export class SkyscannerService {
-  userService: any;
   token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+  private userService: UserService) { }
 
   
   readonly headers: HttpHeaders = new HttpHeaders({
@@ -46,6 +47,7 @@ export class SkyscannerService {
         }
     )
 }
+
 
   getQuotations(
     origemId: string,
