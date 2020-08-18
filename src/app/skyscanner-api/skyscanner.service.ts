@@ -36,6 +36,18 @@ export class SkyscannerService {
     return of(Cotacao.fromRaw(tripmock))
   }
 
+  getUserFlights(userId: number) {
+    return this.http.get<(CompraSkyscanner)[]>(
+        environment.apiBase + `usuarios/${userId}/voos`,
+        {
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        }
+    )
+}
+
+
   buyFlight(compra: CompraSkyscanner) {
     return this.http.post<{ compra: CompraSkyscanner, usuario: User }>(
         `${environment.apiBase}usuarios/${this.userService.userData.id}/voos`,

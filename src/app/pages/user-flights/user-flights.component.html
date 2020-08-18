@@ -3,7 +3,7 @@
 
     <div *ngFor="let passagem of (flights$ | async)" class="card bg-light p-4 mt-2">
         <div class="d-flex justify-content-between">
-            <h6 class="mb-3"><strong>Destino: </strong>{{ passagem.destinyCity }}</h6>
+            <h6 class="mb-3"><strong>Destino: </strong>{{ passagem.aeroportoChegada }}</h6>
             <div>
                 <p class="mb-1"><strong>adquirida em</strong>  {{ passagem.created_at | date }}</p>
                 <p class="mb-1 text-right"><strong>às</strong> {{ passagem.created_at | date:"HH'h'mm" }}</p>
@@ -11,12 +11,11 @@
         </div>
 
         <p class="mb-1 font-weight-bold">Voce irá embarcar em:</p>
-        <p class="mb-3">{{ passagem.origin }}</p>
+        <p class="mb-3">{{ passagem.aeroportoSaida }}</p>
 
         <p class="mb-1 font-weight-bold">Voce irá desembarcar em:</p>
-        <p>{{ passagem.destiny }}</p>
+        <p>{{ passagem.aeroportoChegada }}</p>
 
-        <p><strong>assento: </strong>{{ passagem.poltrona }}</p>
     </div>
 
 </div>
