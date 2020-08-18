@@ -73,7 +73,8 @@ export class Cotacao {
   volta?: DadosVoo;
   companhiaAerea: string;
   soIda: boolean;
-  
+  imgUrl: string;
+
   static fromRaw(rawResponse: IGetCotacoesRaw) {
     return rawResponse.Quotes.map(e => {
       const cotacao = new Cotacao()
