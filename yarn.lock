@@ -1061,6 +1061,11 @@
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-6.1.0.tgz#fce7550a095aeac42108f76ac1ebd63caf8304e9"
   integrity sha512-2GzkNJBKdeHkaUqaCAqSILPft0IzzHjMfAlAuGY6/ZLlVQ0glt5MTbIXtIhSbjR+OvlrljoXFLrvzs1LGdmE+A==
 
+"@ngrx/store@^9.2.0":
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-9.2.1.tgz#a05934bb83344efe669e52acd90b17ebe10c4ab4"
+  integrity sha512-18mLKH7CAi5+F1zYbbxoCDKE8piCxZkwOoPlXEsq/LBKrZvYIvOeSlEXMjiUp3cCL3QOT27QvWIqQkIuE9b7mg==
+
 "@ngtools/webpack@9.1.9":
   version "9.1.9"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-9.1.9.tgz#2098afd6f1f028238468262df2ad10afa81b82a5"
@@ -3780,9 +3785,9 @@ flush-write-stream@^1.0.0:
     readable-stream "^2.3.6"
 
 follow-redirects@^1.0.0:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.12.1.tgz#de54a6205311b93d60398ebc01cf7015682312b6"
-  integrity sha512-tmRv0AVuR7ZyouUHLeNSiO6pqulF7dYa3s19c6t+wz9LD69/uSzdMxJ2S91nTI9U3rt/IldxpzMOFejp6f0hjg==
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
 
 for-in@^1.0.2:
   version "1.0.2"
